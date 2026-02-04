@@ -12,8 +12,14 @@ interface ReservaDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(reserva: Reserva)
 
+    @Update
+    suspend fun update(reserva: Reserva)
+
     @Delete
     suspend fun delete(reserva: Reserva)
+
+    @Query("DELETE FROM reservas WHERE id = :reservaId")
+    suspend fun deleteById(reservaId: Int)
 
     @Query("SELECT COUNT(*) FROM reservas")
     suspend fun countReservas(): Int
