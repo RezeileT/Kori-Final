@@ -31,8 +31,11 @@ import com.example.kori.viewmodel.DishViewModel
 @Composable
 fun HomeScreen(
     viewModel: DishViewModel = viewModel(),
-    onNavigateToMenu: () -> Unit
+    onNavigateToMenu: () -> Unit = {},     // ← Ya existía
+    onNavigateToReservas: () -> Unit = {}  // ← AÑADIR ESTA LÍNEA
 ) {
+    // ... resto del código
+
     val dishes by viewModel.allDishes.collectAsState()
     val bestsellers by viewModel.bestsellers.collectAsState()
     var selectedCategory by remember { mutableStateOf("ITEM1") }
@@ -94,9 +97,15 @@ fun HomeScreen(
                                 Text("Menú", color = Color.Black, fontWeight = FontWeight.Bold)
                             }
                             Spacer(modifier = Modifier.width(16.dp))
-                            OutlinedButton(onClick = { /* Reservas */ }) {
+                            OutlinedButton(
+                                onClick = { onNavigateToReservas() },  // ← CAMBIAR AQUÍ
+                                colors = ButtonDefaults.outlinedButtonColors(
+                                    contentColor = Color(0xFFC9A86A)
+                                )
+                            ) {
                                 Text("Reservar")
                             }
+
                         }
                     }
                 }

@@ -6,19 +6,21 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.kori.data.local.dao.DishDao
+import com.example.kori.data.local.dao.ReservaDao  // ← NUEVO IMPORT
 import com.example.kori.data.local.model.Dish
+import com.example.kori.data.local.model.Reserva  // ← NUEVO IMPORT
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Database(
-    entities = [Dish::class],
-    version = 1,
+    entities = [Dish::class, Reserva::class],  // ← AÑADIDA Reserva
+    version = 2,  // ← INCREMENTADO (era 1, ahora 2)
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
-
     abstract fun dishDao(): DishDao
+    abstract fun reservaDao(): ReservaDao  // ← NUEVO DAO
 
     companion object {
         @Volatile
@@ -31,6 +33,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "kori_database"
                 )
+                    .fallbackToDestructiveMigration()  // ← IMPORTANTE: permite actualizar sin perder datos
                     .addCallback(object : Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)

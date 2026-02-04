@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.androidx.compose.material3)
 
     implementation("androidx.navigation:navigation-compose:2.8.3")
+    implementation(libs.androidx.compose.foundation)
 
     val roomVersion = "2.7.0-alpha11"
     implementation("androidx.room:room-runtime:$roomVersion")
@@ -75,4 +76,6 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+
 }

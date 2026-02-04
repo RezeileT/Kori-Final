@@ -13,6 +13,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.kori.ui.screens.HomeScreen
+import com.example.kori.ui.screens.ReservasScreen  // ← IMPORT NUEVO
 import com.example.kori.ui.theme.KoriTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,12 +32,17 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable("home") {
                             HomeScreen(
-                                onNavigateToMenu = { navController.navigate("menu") }
+                                onNavigateToMenu = { navController.navigate("menu") },
+                                onNavigateToReservas = { navController.navigate("reservas") }  // ← NUEVA NAVEGACIÓN
                             )
                         }
+
                         composable("menu") {
-                            // MenuScreen (próximamente)
-                            Text("Menú Completo")
+                            Text("Menú Completo (Próximamente)")
+                        }
+
+                        composable("reservas") {  // ← AQUÍ VA ReservasScreen
+                            ReservasScreen()
                         }
                     }
                 }

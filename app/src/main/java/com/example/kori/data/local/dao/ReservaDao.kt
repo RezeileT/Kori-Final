@@ -8,10 +8,13 @@ import kotlinx.coroutines.flow.Flow
 interface ReservaDao {
     @Query("SELECT * FROM reservas ORDER BY fechaCreacion DESC")
     fun getAllReservas(): Flow<List<Reserva>>
-    
-    @Insert
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(reserva: Reserva)
-    
+
+    @Delete
+    suspend fun delete(reserva: Reserva)
+
     @Query("SELECT COUNT(*) FROM reservas")
     suspend fun countReservas(): Int
 }

@@ -9,12 +9,13 @@ import java.util.*
 data class Reserva(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val nombre: String,
+    val nombreCompleto: String,  // ← Cambié "nombre" por "nombreCompleto"
     val email: String,
     val telefono: String,
-    val fecha: String,  // "2026-02-04"
-    val hora: String,   // "20:30"
-    val personas: Int,
+    val fecha: String,        // "2026-02-04"
+    val hora: String,         // "20:30"
+    val numeroPersonas: Int,  // ← Cambié "personas" por "numeroPersonas"
+    val comentarios: String = "",  // ← AÑADIDO campo comentarios
     val fechaCreacion: Long = System.currentTimeMillis()
 ) {
     fun getFechaFormateada(): String {
